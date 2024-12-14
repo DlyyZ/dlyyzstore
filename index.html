@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLYYZ Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Background Video */
+        .background video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Card Container */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            width: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            background: url('https://files.catbox.moe/et3bmj.mp4') no-repeat center center/cover;
+            height: 150px;
+        }
+
+        .profile-pic {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border: 4px solid #800080; /* Purple border */
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Body */
+        .body {
+            padding: 60px 20px 20px;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: block;
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            margin: 5px auto;
+            width: 80%;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn.whatsapp {
+            background: #25d366;
+        }
+
+        .btn.tiktok {
+            background: #25d366; /* Updated to WhatsApp color */
+        }
+
+        h2 {
+            color: #800080; /* Purple color */
+            font-size: 16px;
+            margin: 15px 0 5px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .role-tags {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .role {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .role.orange {
+            background-color: #f39c12;
+        }
+
+        .role.pink {
+            background-color: #e84393;
+        }
+
+        .role.more {
+            background-color: #888;
+        }
+
+        .fun-fact p {
+            font-style: italic;
+            color: #ccc;
+        }
+
+        /* Footer */
+        .footer input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #555;
+            outline: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <div class="background">
+        <video autoplay loop muted>
+            <source src="https://files.catbox.moe/9r795s.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="card-container">
+        <div class="profile-card">
+            <!-- Header -->
+            <div class="header">
+                <img src="https://files.catbox.moe/x62mu4.jpg" alt="Profile Picture" class="profile-pic">
+            </div>
+
+            <!-- Body -->
+            <div class="body">
+                <h1 class="name">DLYYZ <span class="badge">OWNER</span></h1>
+                <div class="buttons">
+                    <a href="https://wa.me/6285691259261" class="btn whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://chat.whatsapp.com/LIA44rRROuGJIRQ3jPz7VE" class="btn tiktok">
+                        <i class="fa-brands fa-whatsapp"></i> Join WhatsApp Group
+                    </a>
+                </div>
+                <div class="about">
+                    <h2>ABOUT ME</h2>
+                    <p>Hai, I'm <b>DLYYZ</b>. <br>
+                    → Aku adalah owner <b>DLYYZSTORE</b>, kami menyediakan berbagai produk unik seperti aplikasi premium, kebutuhan sosmed otomatis, topup otomatis dengan bot WhatsApp kami sediakan di grup store kami, harga di jamin murah dan sangat terjangkau, tidak menguras dompet kalian pasti.......</p>
+                </div>
+                <div class="since">
+                    <h2>SINCE</h2>
+                    <p>2021 - 2024</p>
+                </div>
+                <div class="roles">
+                    <h2>ROLES OWNER</h2>
+                    <div class="role-tags">
+                        <span class="role orange">DLYYZSTORE</span>
+                        <span class="role pink">DLYYZ</span>
+                        <span class="role more">+</span>
+                    </div>
+                </div>
+                <div class="fun-fact">
+                    <h2>FUN FACT</h2>
+                    <p>DLYYZ SUKA BEGADANG XD</p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <input type="text" placeholder="Kirim pesan @dlyyz..." id="messageInput"/>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const message = encodeURIComponent(this.value);
+                window.location.href = `https://wa.me/6285691259261?text=${message}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -15,9 +15,9 @@
         }
 
         body, html {
-            height: 100%;
-            overflow: hidden;
-        }
+    height: 100%;
+    overflow: hidden; /* Mencegah scroll horizontal pada seluruh halaman */
+}
 
         /* Background Video */
         .background {
@@ -52,25 +52,24 @@
 
         /* Snow Effect */
         .snow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; /* Pastikan di atas video dan background */
+}
 
-        .snow span {
-            position: absolute;
-            top: -10px;
-            width: 10px;
-            height: 10px;
-            background: white;
-            opacity: 0.8;
-            border-radius: 50%;
-            animation: fall linear infinite;
-        }
+.snow span {
+    position: absolute; /* Agar salju bisa bergerak secara bebas */
+    width: 10px;
+    height: 10px;
+    background: white;
+    opacity: 0.8;
+    border-radius: 100%;
+    animation: fall linear infinite, fall 5s linear infinite;
+}
 
         @keyframes fall {
             0% {
@@ -85,35 +84,71 @@
 
         /* Card Container */
         .card-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden; /* Mencegah scroll pada card container */
+}
 
         /* Profile Card */
-        .profile-card {
-            background-color: rgba(0, 0, 0, 0.85);
-            color: #fff;
-            width: 400px;
-            height: 85vh;
-            overflow-y: auto;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
-            animation: fadeInUp 1.5s ease-out forwards;
-        }
+.profile-card {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    width: 390px;
+    height: 75vh;
+    overflow-y: auto; /* Scroll vertikal */
+    overflow-x: hidden; /* Mencegah scroll horizontal pada card */
+    border-radius: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+    animation: fadeInUp 1.5s ease-out forwards;
+    position: relative;
+}
+
+/* Snow Effect within profile card */
+.profile-card .snow2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.profile-card .snow2 span {
+    position: absolute;
+    top: 100%;
+    width: 10px;
+    height: 10px;
+    background: white;
+    opacity: 0.8;
+    border-radius: 50%;
+    animation: fall linear infinite, rise 5s linear infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0.5;
+    }
+}
 
         .profile-card:hover {
-            box-shadow: 0 0 20px 10px #3b82f6, 0 0 25px 15px #800080;
+            box-shadow: 0 0 15px 10px #3b82f6, 0 0 20px 10px #800080;
         }
 
         /* Header */
         .header {
             position: relative;
-            background: url('https://files.catbox.moe/et3bmj.mp4') no-repeat center center/cover;
-            height: 180px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            background: url('https://files.catbox.moe/x62mu4.jpg') no-repeat center center/cover;
+            height: 170px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
         }
 
         .profile-pic {
@@ -222,6 +257,60 @@
             font-style: italic;
             color: #ccc;
         }
+        
+        .btn2 {
+    display: block;
+    background-color: #7b2cbf; /* Ungu terang */
+    color: white;
+    padding: 12px;
+    margin: 8px auto;
+    width: 85%;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(123, 44, 191, 0.8), 0 0 20px rgba(123, 44, 191, 0.6);
+}
+
+.btn2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(123, 44, 191, 0.1));
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 1;
+    border-radius: 50%;
+    animation: pulse 3s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.btn2:hover {
+    background-color: #9d4edd; /* Lebih terang saat di-hover */
+    box-shadow: 0 0 20px rgba(123, 44, 191, 1), 0 0 30px rgba(123, 44, 191, 0.8);
+    color: #fff;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+}
 
         /* Footer */
         .footer input {
@@ -247,79 +336,163 @@
                 transform: translateY(0);
             }
         }
+
+        /* Animation for showing and hiding the group links */
+        @keyframes slideDown {
+            0% {
+                max-height: 0;
+                opacity: 0;
+            }
+            100% {
+                max-height: 200px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                max-height: 200px;
+                opacity: 1;
+            }
+            100% {
+                max-height: 0;
+                opacity: 0;
+            }
+        }
+
+        .group-links {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+        }
     </style>
 </head>
 <body>
+    <audio autoplay muted loop id="bg-audio">
+        <source src="https://files.catbox.moe/rp1pov.mp4" type="video/mp4">
+    </audio>
     <div class="background">
+    <div class="snow"></div> <!-- Snow effect for background -->
         <video autoplay loop muted>
             <source src="https://files.catbox.moe/9r795s.mp4" type="video/mp4">
         </video>
     </div>
-
-    <div class="snow"></div>
-
     <div class="card-container">
         <div class="profile-card">
-            <div class="header">
-                <img src="https://files.catbox.moe/x62mu4.jpg" alt="Profile Picture" class="profile-pic">
-            </div>
-            <div class="body">
-                <h1 class="name">DLYYZ <span class="badge">OWNER</span></h1>
-                <div class="buttons">
-                    <a href="https://wa.me/6285691259261" class="btn whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="https://chat.whatsapp.com/LIA44rRROuGJIRQ3jPz7VE" class="btn">
-                        <i class="fa-brands fa-whatsapp"></i> Join WhatsApp Group
-                    </a>
-                </div>
-                <div class="about">
-                    <h2>ABOUT ME</h2>
-                    <p>Hai, I'm <b>DLYYZ</b>. <br> → Aku adalah owner <b>DLYYZSTORE</b>, kami menyediakan berbagai produk unik seperti aplikasi premium, kebutuhan sosmed otomatis, topup otomatis dengan bot WhatsApp kami sediakan di grup store kami, harga di jamin murah dan sangat terjangkau, tidak menguras dompet kalian pasti.......</p>
-                 </div>
-                <div class="since">
-                    <h2>SINCE</h2>
-                    <p>2024 - 2025</p>
-                </div>
-                <div class="roles">
-                    <h2>ROLES OWNER</h2>
-                    <div class="role-tags">
-                        <span class="role orange">DLYYZSTORE</span>
-                        <span class="role pink">DLYYZ</span>
-                        <span class="role more">+</span>
-                    </div>
-                </div>
-                <div class="fun-fact">
-                    <h2>FUN FACT</h2>
-                    <p>DLYYZ SUKA BEGADANG XD</p>
-                </div>
-            </div>
-            <div class="footer">
-                <input type="text" placeholder="Kirim pesan @dlyyz..." id="messageInput"/>
+    <!-- Add snow container inside profile card -->
+    <div class="snow2"></div>
+
+    <div class="header">
+        <img src="https://files.catbox.moe/x62mu4.jpg" alt="Profile Picture" class="profile-pic">
+    </div>
+    <div class="body">
+        <h1 class="name">DLYYZ <span class="badge">OWNER</span></h1>
+        <div class="buttons">
+            <a href="https://wa.me/6285691259261" class="btn whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Owner
+            </a>
+            <button id="groupButton" class="btn2">
+                <i class="fa-solid fa-users-line"></i> Show Groups
+            </button>
+            <div id="groupLinks" class="group-links">
+                <a href="https://chat.whatsapp.com/LIA44rRROuGJIRQ3jPz7VE" class="btn">
+                    <i class="fa-brands fa-whatsapp"></i> Group DʅყყZSƚσɾҽ
+                </a>
+                <a href="https://chat.whatsapp.com/Lh28NN3edFa6bzHhMoeilw" class="btn">
+                    <i class="fa-brands fa-whatsapp"></i> Group 𝙺𝙴𝙱𝚂𝙾𝚂 + 𝚃𝙾𝙿𝚄𝙿 𝙾𝚃𝙾𝙼𝙰𝚂𝙸𝚂
+                </a>
             </div>
         </div>
+        <div class="about">
+            <h2>ABOUT ME</h2>
+            <p>Hai, I'm <b>DLYYZ</b>. <br> → Aku adalah owner <b>DLYYZSTORE</b>, kami menyediakan berbagai produk unik seperti aplikasi premium, kebutuhan sosmed otomatis, topup otomatis dengan bot WhatsApp kami sediakan di grup store kami, harga di jamin murah dan sangat terjangkau, yang pastinya tidak menguras dompet kalian.......</p>
+        </div>
+        <div class="since">
+            <h2>SINCE</h2>
+            <p>2024 - 2025</p>
+        </div>
+        <div class="roles">
+            <h2>ROLES OWNER</h2>
+            <div class="role-tags">
+                <span class="role orange">DLYYZSTORE</span>
+                <span class="role pink">DLYYZ</span>
+                <span class="role more">+</span>
+            </div>
+        </div>
+        <div class="fun-fact">
+            <h2>FUN FACT</h2>
+            <p>DLYYZ SUKA BEGADANG XD</p>
+        </div>
     </div>
+    <div class="footer">
+        <input type="text" placeholder="Kirim pesan @dlyyz..." id="messageInput"/>
+    </div>
+</div>
 
     <script>
-        // Snow Effect Script
-        function createSnowflakes() {
-            const snowContainer = document.querySelector('.snow');
-            for (let i = 0; i < 100; i++) {
-                const snowflake = document.createElement('span');
-                const size = Math.random() * 4 + 2;
-                const position = Math.random() * 100;
-                const duration = Math.random() * 5 + 3;
-                const delay = Math.random() * 5;
+// Snow Effect Script for falling snowflakes (background)
+function createSnowflakes1() {
+    const snowContainer = document.querySelector('.snow');
+    for (let i = 0; i < 150; i++) { // Menambah jumlah snowflakes
+        const snowflake = document.createElement('span');
+        const size = Math.random() * 4 + 2; // Menambah rentang ukuran salju
+        const position = Math.random() * 100;
+        const duration = Math.random() * 3 + 4; // Mengurangi durasi animasi untuk membuat salju lebih cepat
+        const delay = Math.random() * 2;
 
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                snowflake.style.left = `${position}%`;
-                snowflake.style.animationDuration = `${duration}s`;
-                snowflake.style.animationDelay = `${delay}s`;
+        // Atur posisi awal snowflake di tempat yang lebih acak
+        snowflake.style.top = `${Math.random() * 100}vh`; // Snowflakes mulai di berbagai posisi vertikal
 
-                snowContainer.appendChild(snowflake);
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+        snowflake.style.left = `${position}%`;
+        snowflake.style.animationDuration = `${duration}s`;
+        snowflake.style.animationDelay = `${delay}s`;
+
+        snowContainer.appendChild(snowflake);
+    }
+}
+
+// Snow Effect Script for flakes rising up (inside the profile card)
+function createSnowflakes2() {
+    const snowContainer = document.querySelector('.profile-card .snow2'); // Select snow container inside profile card
+    for (let i = 0; i < 150; i++) {
+        const snowflake = document.createElement('span');
+        const size = Math.random() * 3 + 2;
+        const position = Math.random() * 500;
+        const duration = Math.random() * 10 + 5;
+        const delay = Math.random() * 10;
+        
+        snowflake.style.top = `${Math.random() * 100}vh`;
+
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+        snowflake.style.left = `${position}%`;
+        snowflake.style.animationDuration = `${duration}s`;
+        snowflake.style.animationDelay = `${delay}s`;
+
+        snowContainer.appendChild(snowflake);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    createSnowflakes1(); // Create falling snowflakes outside the card
+    createSnowflakes2(); // Create rising snowflakes inside the card
+});
+
+        document.getElementById('groupButton').addEventListener('click', function () {
+            const groupLinks = document.getElementById('groupLinks');
+            if (groupLinks.style.maxHeight === '0px') {
+                groupLinks.style.animation = 'slideDown 0.5s forwards';
+                groupLinks.style.maxHeight = '200px';
+                groupLinks.style.opacity = '1';
+            } else {
+                groupLinks.style.animation = 'slideUp 0.5s forwards';
+                groupLinks.style.maxHeight = '0';
+                groupLinks.style.opacity = '0';
             }
-        }
+        });
 
         document.addEventListener('DOMContentLoaded', createSnowflakes);
 

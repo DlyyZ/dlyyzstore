@@ -431,24 +431,29 @@
 </div>
 
     <script>
-// Snow Effect Script for falling snowflakes (background)
 function createSnowflakes1() {
     const snowContainer = document.querySelector('.snow');
-    for (let i = 0; i < 150; i++) { // Menambah jumlah snowflakes
+    const snowflakeCount = 50; // Kurangi jumlah snowflakes
+
+    for (let i = 0; i < snowflakeCount; i++) {
         const snowflake = document.createElement('span');
-        const size = Math.random() * 4 + 2; // Menambah rentang ukuran salju
+        const size = Math.random() * 3 + 1; // Rentang ukuran lebih kecil
         const position = Math.random() * 100;
-        const duration = Math.random() * 3 + 4; // Mengurangi durasi animasi untuk membuat salju lebih cepat
+        const duration = Math.random() * 2 + 3; // Durasi lebih pendek
         const delay = Math.random() * 2;
 
-        // Atur posisi awal snowflake di tempat yang lebih acak
-        snowflake.style.top = `${Math.random() * 100}vh`; // Snowflakes mulai di berbagai posisi vertikal
-
+        // Atur gaya snowflake
         snowflake.style.width = `${size}px`;
         snowflake.style.height = `${size}px`;
         snowflake.style.left = `${position}%`;
         snowflake.style.animationDuration = `${duration}s`;
         snowflake.style.animationDelay = `${delay}s`;
+        snowflake.style.position = 'absolute';
+        snowflake.style.top = `-${size * 2}px`; // Mulai sedikit di atas layar
+        snowflake.style.background = 'white'; // Warna snowflakes
+        snowflake.style.borderRadius = '50%'; // Bentuk bulat
+        snowflake.style.opacity = Math.random(); // Transparansi random
+        snowflake.style.willChange = 'transform'; // Optimasi rendering
 
         snowContainer.appendChild(snowflake);
     }
@@ -457,11 +462,11 @@ function createSnowflakes1() {
 // Snow Effect Script for flakes rising up (inside the profile card)
 function createSnowflakes2() {
     const snowContainer = document.querySelector('.profile-card .snow2'); // Select snow container inside profile card
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 120; i++) {
         const snowflake = document.createElement('span');
         const size = Math.random() * 3 + 2;
-        const position = Math.random() * 500;
-        const duration = Math.random() * 10 + 5;
+        const position = Math.random() * 100;
+        const duration = Math.random() * 10 + 6;
         const delay = Math.random() * 10;
         
         snowflake.style.top = `${Math.random() * 100}vh`;

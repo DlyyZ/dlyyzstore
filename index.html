@@ -105,7 +105,7 @@
     position: relative;
 }
 
-/* Snow Effect within profile card */
+/* Efek Bokeh di Profile Card */
 .profile-card .snow2 {
     position: absolute;
     top: 0;
@@ -114,27 +114,31 @@
     height: 100%;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden; /* Menghindari bokeh keluar area */
 }
 
 .profile-card .snow2 span {
     position: absolute;
-    top: 100%;
-    width: 10px;
-    height: 10px;
-    background: white;
-    opacity: 0.8;
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6); /* Warna partikel */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); /* Efek glowing */
     border-radius: 50%;
-    animation: fall linear infinite, rise 5s linear infinite;
+    animation: floatBokeh linear infinite; /* Animasi gerakan */
 }
 
-@keyframes rise {
+@keyframes floatBokeh {
     0% {
-        transform: translateY(0);
-        opacity: 1;
+        transform: translateY(0) translateX(0); /* Mulai dari posisi awal */
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(20px); /* Gerakan ke arah atas dan samping */
+        opacity: 0.8;
     }
     100% {
-        transform: translateY(-100vh);
-        opacity: 0.5;
+        transform: translateY(50vh) translateX(-30px); /* Bergerak ke bawah dan samping */
+        opacity: 0;
     }
 }
 
@@ -462,27 +466,34 @@ function createSnowflakes1() {
     }
 }
 
-// Snow Effect Script for flakes rising up (inside the profile card)
-function createSnowflakes2() {
-    const snowContainer = document.querySelector('.profile-card .snow2'); // Select snow container inside profile card
-    for (let i = 0; i < 50; i++) {
-        const snowflake = document.createElement('span');
-        const size = Math.random() * 3 + 2;
-        const position = Math.random() * 100;
-        const duration = Math.random() * 10 + 6;
-        const delay = Math.random() * 10;
-        
-        snowflake.style.top = `${Math.random() * 90}vh`;
+function createBokeh() {
+    const bokehContainer = document.querySelector('.profile-card .snow2'); // Kontainer efek bokeh
+    const bokehCount = 30; // Jumlah partikel bokeh
 
-        snowflake.style.width = `${size}px`;
-        snowflake.style.height = `${size}px`;
-        snowflake.style.left = `${position}%`;
-        snowflake.style.animationDuration = `${duration}s`;
-        snowflake.style.animationDelay = `${delay}s`;
+    for (let i = 0; i < bokehCount; i++) {
+        const bokeh = document.createElement('span');
+        const size = Math.random() * 15 + 5; // Ukuran partikel bokeh
+        const positionX = Math.random() * 100; // Posisi horizontal acak
+        const positionY = Math.random() * 100; // Posisi vertical acak
+        const duration = Math.random() * 8 + 4; // Durasi animasi
+        const delay = Math.random() * 5; // Delay animasi
 
-        snowContainer.appendChild(snowflake);
+        // Gaya bokeh
+        bokeh.style.width = `${size}px`;
+        bokeh.style.height = `${size}px`;
+        bokeh.style.left = `${positionX}%`;
+        bokeh.style.top = `${positionY}%`; // Mulai dari posisi vertikal acak
+        bokeh.style.animationDuration = `${duration}s`;
+        bokeh.style.animationDelay = `${delay}s`;
+
+        bokehContainer.appendChild(bokeh);
     }
 }
+
+// Panggil fungsi bokeh saat halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', function () {
+    createBokeh();
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     createSnowflakes1(); // Create falling snowflakes outside the card

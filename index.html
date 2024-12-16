@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DLYYZ Profile</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
         /* Reset */
         * {
@@ -19,13 +20,17 @@
 }
         /* Background Video */
         .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff007a, #6236ff, #00f7ff, #ff007a);
+    background-size: 300% 300%;
+    animation: gradientMove 6s ease infinite;
+    z-index: -2;
+}
+
         .background video {
             position: absolute;
             top: 0;
@@ -95,6 +100,17 @@
     animation: fadeInUp 1.5s ease-out forwards;
     position: relative;
 }
+
+.profile-card:hover {
+    animation: shakeCard 0.5s ease-in-out forwards;
+}
+
+@keyframes shakeCard {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
 /* Efek Bokeh di Profile Card */
 .profile-card .snow2 {
     position: absolute;
@@ -141,17 +157,37 @@
             border-top-right-radius: 15px;
         }
         .profile-pic {
-            position: absolute;
-            bottom: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 120px;
-            border: 5px solid #800080;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 0 20px #800080;
-        }
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border: 5px solid transparent; /* Border tetap transparan */
+    border-radius: 50%; /* Lingkaran */
+    object-fit: cover;
+    box-shadow: 0 0 5px #800080, 0 0 5px #6236ff, 0 0 15px #00f7ff; /* Glow */
+    animation: glow 2s infinite, gradient-move 3s infinite; /* Animasi */
+}
+
+@keyframes glow {
+    0%, 50% {
+        box-shadow: 0 0 5px #800080, 0 0 5px #6236ff, 0 0 10px #00f7ff;
+    }
+    25% {
+        box-shadow: 0 0 5px #ff007a, 0 0 20px #ff007a, 0 0 40px #ff007a;
+    }
+}
+
+@keyframes gradient-move {
+    0% {
+        border-color: transparent;
+    }
+    50% {
+        border-color: transparent;
+    }
+}
+
         /* Body */
         .body {
             padding: 70px 20px 20px;
@@ -188,9 +224,12 @@
             font-weight: bold;
             transition: 0.3s;
         }
-        .btn:hover {
-            box-shadow: 0 0 15px #fff, 0 0 20px #800080;
-        }
+        ..btn:hover {
+    background-color: #9d4edd; /* Warna hover */
+    transform: scale(1.1); /* Efek zoom */
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px #ff007a, 0 0 20px #3b82f6;
+}
         .btn.whatsapp {
             background: #25d366;
         }
@@ -338,6 +377,15 @@
             opacity: 0;
             transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
         }
+        @media (max-width: 768px) {
+    .profile-card {
+        width: 80%;  /* Mengatur lebar kartu profil di perangkat kecil */
+    }
+    .profile-pic {
+        width: 90px; /* Mengatur ukuran gambar profil di perangkat kecil */
+        height: 90px;
+    }
+}
 </style>
 </head>
 <body>
@@ -396,7 +444,9 @@
 				<p>
 					DLYYZ SUKA BEGADANG XD
 				</p>
-				<div class="created-by">Created by DLYYZ</div>
+				<p>
+				Created By DlyyZ
+				</p>
 			</div>
 			<div class="footer">
 				<input type="text" placeholder="Kirim pesan @dlyyz..." id="messageInput"/>
@@ -410,7 +460,7 @@ function createSnowflakes1() {
         const snowflake = document.createElement('span');
         const size = Math.random() * 3 + 1; // Rentang ukuran lebih kecil
         const position = Math.random() * 100;
-        const duration = Math.random() * 5 + 3; // Durasi lebih pendek
+        const duration = Math.random() * 5 + 5; // Durasi lebih pendek
         const delay = Math.random() * 2;
         // Atur gaya snowflake
         snowflake.style.width = `${size}px`;
@@ -435,7 +485,7 @@ function createBokeh() {
         const size = Math.random() * 15 + 5; // Ukuran partikel bokeh
         const positionX = Math.random() * 100; // Posisi horizontal acak
         const positionY = Math.random() * 100; // Posisi vertical acak
-        const duration = Math.random() * 8 + 4; // Durasi animasi
+        const duration = Math.random() * 10 + 5; // Durasi animasi
         const delay = Math.random() * 5; // Delay animasi
         // Gaya bokeh
         bokeh.style.width = `${size}px`;
@@ -447,6 +497,7 @@ function createBokeh() {
         bokehContainer.appendChild(bokeh);
     }
 }
+
 // Panggil fungsi bokeh saat halaman selesai dimuat
 document.addEventListener('DOMContentLoaded', function () {
     createBokeh();

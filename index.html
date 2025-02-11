@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLYYZ Profile</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body, html {
+    height: 100%;
+    overflow: hidden; /* Mencegah scroll horizontal pada seluruh halaman */
+}
+        /* Background Video */
+        .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff007a, #6236ff, #00f7ff, #ff007a);
+    background-size: 300% 300%;
+    animation: gradientMove 6s ease infinite;
+    z-index: -2;
+}
+
+        .background video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Overlay Gradient */
+        .background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+            z-index: -1;
+        }
+        /* Snow Effect */
+        .snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; /* Pastikan di atas video dan background */
+}
+.snow span {
+    position: absolute; /* Agar salju bisa bergerak secara bebas */
+    width: 10px;
+    height: 10px;
+    background: white;
+    opacity: 0.8;
+    border-radius: 100%;
+    animation: fall linear infinite, fall 5s linear infinite;
+}
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* Card Container */
+        .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden; /* Mencegah scroll pada card container */
+}
+        /* Profile Card */
+.profile-card {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    width: 390px;
+    height: 75vh;
+    overflow-y: auto; /* Scroll vertikal */
+    overflow-x: hidden; /* Mencegah scroll horizontal pada card */
+    border-radius: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+    animation: fadeInUp 1.5s ease-out forwards;
+    position: relative;
+}
+
+.profile-card:hover {
+    animation: shakeCard 0.5s ease-in-out forwards;
+}
+
+@keyframes shakeCard {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* Efek Bokeh di Profile Card */
+.profile-card .snow2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden; /* Menghindari bokeh keluar area */
+}
+.profile-card .snow2 span {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6); /* Warna partikel */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); /* Efek glowing */
+    border-radius: 50%;
+    animation: floatBokeh linear infinite; /* Animasi gerakan */
+}
+@keyframes floatBokeh {
+    0% {
+        transform: translateY(0) translateX(0); /* Mulai dari posisi awal */
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(20px); /* Gerakan ke arah atas dan samping */
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(50vh) translateX(-30px); /* Bergerak ke bawah dan samping */
+        opacity: 0;
+    }
+}
+        .profile-card:hover {
+            box-shadow: 0 0 15px 10px #3b82f6, 0 0 20px 10px #800080;
+        }
+        /* Header */
+        .header {
+            position: relative;
+            background: url('https://files.catbox.moe/x62mu4.jpg') no-repeat center center/cover;
+            height: 170px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .profile-pic {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border: 5px solid transparent; /* Border tetap transparan */
+    border-radius: 50%; /* Lingkaran */
+    object-fit: cover;
+    box-shadow: 0 0 5px #800080, 0 0 5px #6236ff, 0 0 15px #00f7ff; /* Glow */
+    animation: glow 2s infinite, gradient-move 3s infinite; /* Animasi */
+}
+
+@keyframes glow {
+    0%, 50% {
+        box-shadow: 0 0 5px #800080, 0 0 5px #6236ff, 0 0 10px #00f7ff;
+    }
+    25% {
+        box-shadow: 0 0 5px #ff007a, 0 0 20px #ff007a, 0 0 40px #ff007a;
+    }
+}
+
+@keyframes gradient-move {
+    0% {
+        border-color: transparent;
+    }
+    50% {
+        border-color: transparent;
+    }
+}
+
+        /* Body */
+        .body {
+            padding: 70px 20px 20px;
+            text-align: center;
+        }
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #800080, 0 0 20px #3b82f6;
+        }
+        .badge {
+            background: #3b82f6;
+            color: white;
+            padding: 5px 12px;
+            font-size: 14px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px 2px #3b82f6;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        .btn {
+            display: block;
+            background-color: #444;
+            color: white;
+            padding: 12px;
+            margin: 8px auto;
+            width: 85%;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        ..btn:hover {
+    background-color: #9d4edd; /* Warna hover */
+    transform: scale(1.1); /* Efek zoom */
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px #ff007a, 0 0 20px #3b82f6;
+}
+        .btn.whatsapp {
+            background: #25d366;
+        }
+        h2 {
+            color: #800080;
+            font-size: 18px;
+            margin: 20px 0 10px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .role-tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .role {
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
+        }
+        .role.orange {
+            background-color: #f39c12;
+            box-shadow: 0 0 8px #f39c12;
+        }
+        .role.pink {
+            background-color: #e84393;
+            box-shadow: 0 0 8px #e84393;
+        }
+        .role.more {
+            background-color: #888;
+            box-shadow: 0 0 8px #888;
+        }
+        .fun-fact p {
+            font-style: italic;
+            color: #ccc;
+        }
+.created-by {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: #888;
+}
+        .btn2 {
+    display: block;
+    background-color: #7b2cbf; /* Ungu terang */
+    color: white;
+    padding: 12px;
+    margin: 8px auto;
+    width: 85%;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(123, 44, 191, 0.8), 0 0 20px rgba(123, 44, 191, 0.6);
+}
+.btn2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(123, 44, 191, 0.1));
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 1;
+    border-radius: 50%;
+    animation: pulse 3s infinite ease-in-out;
+    pointer-events: none;
+}
+.btn2:hover {
+    background-color: #9d4edd; /* Lebih terang saat di-hover */
+    box-shadow: 0 0 20px rgba(123, 44, 191, 1), 0 0 30px rgba(123, 44, 191, 0.8);
+    color: #fff;
+}
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+}
+        /* Footer */
+        .footer input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-top: 1px solid #555;
+            outline: none;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+        }
+        /* Animasi Muncul Card */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Animation for showing and hiding the group links */
+        @keyframes slideDown {
+            0% {
+                max-height: 0;
+                opacity: 0;
+            }
+            100% {
+                max-height: 200px;
+                opacity: 1;
+            }
+        }
+        @keyframes slideUp {
+            0% {
+                max-height: 200px;
+                opacity: 1;
+            }
+            100% {
+                max-height: 0;
+                opacity: 0;
+            }
+        }
+        .group-links {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+        }
+        @media (max-width: 768px) {
+    .profile-card {
+        width: 80%;  /* Mengatur lebar kartu profil di perangkat kecil */
+    }
+    .profile-pic {
+        width: 90px; /* Mengatur ukuran gambar profil di perangkat kecil */
+        height: 90px;
+    }
+}
+</style>
+</head>
+<body>
+<audio autoplay muted loop id="bg-audio">
+<source src="https://files.catbox.moe/rp1pov.mp4" type="video/mp4">
+</audio>
+<div class="background">
+	<div class="snow"></div>
+	<!-- Snow effect for background -->
+	<video autoplay loop muted>
+	<source src="https://files.catbox.moe/9r795s.mp4" type="video/mp4">
+	</video>
+</div>
+<div class="card-container">
+	<div class="profile-card">
+		<!-- Add snow container inside profile card -->
+		<div class="snow2"></div>
+		<div class="header">
+			<img src="https://files.catbox.moe/x62mu4.jpg" alt="Profile Picture" class="profile-pic">
+		</div>
+		<div class="body">
+			<h1 class="name">DLYYZ <span class="badge">OWNER</span></h1>
+			<div class="buttons">
+				<a href="https://wa.me/6285691259261" class="btn whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp Owner </a>
+				<button id="groupButton" class="btn2">
+				<i class="fa-solid fa-users-line"></i> Show Groups </button>
+				<div id="groupLinks" class="group-links">
+					<a href="https://chat.whatsapp.com/LIA44rRROuGJIRQ3jPz7VE" class="btn"><i class="fa-brands fa-whatsapp"></i> Group DʅყყZSƚσɾҽ </a>
+					<a href="https://chat.whatsapp.com/Lh28NN3edFa6bzHhMoeilw" class="btn"><i class="fa-brands fa-whatsapp"></i> Group 𝙺𝙴𝙱𝚂𝙾𝚂 + 𝚃𝙾𝙿𝚄𝙿 𝙾𝚃𝙾𝙼𝙰𝚂𝙸𝚂 </a>
+					<a href="https://chat.whatsapp.com/JBadzhig9m0DUtYkpWPj9x" class="btn"><i class="fa-brands fa-whatsapp"></i> Group Fun By DlyyZ </a>
+				</div>
+				<button id="channelButton" class="btn2">
+				<i class="fa-solid fa-users-line"></i> Show Channels </button>
+				<div id="channelLinks" class="group-links">
+					<a href="https://whatsapp.com/channel/0029Vb2IgeM5K3zQGybVFM3m" class="btn"><i class="fa-brands fa-whatsapp"></i> INFO TOPUP + KEBSOS OTOMATIS DLYYZ </a>
+					<a href="https://whatsapp.com/channel/0029VafOWVaFcow1C8oFt82s" class="btn"><i class="fa-brands fa-whatsapp"></i> TESTIMONI DLYYZSTORE </a>
+				</div>
+			</div>
+			<div class="about">
+				<h2>ABOUT ME</h2>
+				<p>
+					Hai, I'm <b>DLYYZ</b>. <br>
+					 → Aku adalah owner <b>DLYYZSTORE</b>, kami menyediakan berbagai produk unik seperti aplikasi premium, kebutuhan sosmed otomatis, topup otomatis dengan bot WhatsApp kami sediakan di grup store kami, harga di jamin murah dan sangat terjangkau, yang pastinya tidak menguras dompet kalian.......
+				</p>
+			</div>
+			<div class="since">
+				<h2>SINCE</h2>
+				<p>
+					2024 - 2025
+				</p>
+			</div>
+			<div class="roles">
+				<h2>ROLES OWNER</h2>
+				<div class="role-tags">
+					<span class="role orange">DLYYZSTORE</span>
+					<span class="role pink">DLYYZ</span>
+					<span class="role more">+</span>
+				</div>
+			</div>
+			<div class="fun-fact">
+				<h2>FUN FACT</h2>
+				<p>
+					DLYYZ SUKA BEGADANG XD
+				</p>
+				<p>
+				Created By DlyyZ
+				</p>
+			</div>
+			<div class="footer">
+				<input type="text" placeholder="Kirim pesan @dlyyz..." id="messageInput"/>
+			</div>
+		</div>
+		<script>
+function createSnowflakes1() {
+    const snowContainer = document.querySelector('.snow');
+    const snowflakeCount = 50; // Kurangi jumlah snowflakes
+    for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('span');
+        const size = Math.random() * 3 + 1; // Rentang ukuran lebih kecil
+        const position = Math.random() * 100;
+        const duration = Math.random() * 5 + 5; // Durasi lebih pendek
+        const delay = Math.random() * 2;
+        // Atur gaya snowflake
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+        snowflake.style.left = `${position}%`;
+        snowflake.style.animationDuration = `${duration}s`;
+        snowflake.style.animationDelay = `${delay}s`;
+        snowflake.style.position = 'absolute';
+        snowflake.style.top = `-${size * 2}px`; // Mulai sedikit di atas layar
+        snowflake.style.background = 'white'; // Warna snowflakes
+        snowflake.style.borderRadius = '50%'; // Bentuk bulat
+        snowflake.style.opacity = Math.random(); // Transparansi random
+        snowflake.style.willChange = 'transform'; // Optimasi rendering
+        snowContainer.appendChild(snowflake);
+    }
+}
+function createBokeh() {
+    const bokehContainer = document.querySelector('.profile-card .snow2'); // Kontainer efek bokeh
+    const bokehCount = 30; // Jumlah partikel bokeh
+    for (let i = 0; i < bokehCount; i++) {
+        const bokeh = document.createElement('span');
+        const size = Math.random() * 15 + 5; // Ukuran partikel bokeh
+        const positionX = Math.random() * 100; // Posisi horizontal acak
+        const positionY = Math.random() * 100; // Posisi vertical acak
+        const duration = Math.random() * 10 + 5; // Durasi animasi
+        const delay = Math.random() * 5; // Delay animasi
+        // Gaya bokeh
+        bokeh.style.width = `${size}px`;
+        bokeh.style.height = `${size}px`;
+        bokeh.style.left = `${positionX}%`;
+        bokeh.style.top = `${positionY}%`; // Mulai dari posisi vertikal acak
+        bokeh.style.animationDuration = `${duration}s`;
+        bokeh.style.animationDelay = `${delay}s`;
+        bokehContainer.appendChild(bokeh);
+    }
+}
+
+// Panggil fungsi bokeh saat halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', function () {
+    createBokeh();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    createSnowflakes1(); // Create falling snowflakes outside the card
+    createSnowflakes2(); // Create rising snowflakes inside the card
+});
+        document.getElementById('groupButton').addEventListener('click', function () {
+            const groupLinks = document.getElementById('groupLinks');
+            if (groupLinks.style.maxHeight === '0px') {
+                groupLinks.style.animation = 'slideDown 0.5s forwards';
+                groupLinks.style.maxHeight = '200px';
+                groupLinks.style.opacity = '1';
+            } else {
+                groupLinks.style.animation = 'slideUp 0.5s forwards';
+                groupLinks.style.maxHeight = '0';
+                groupLinks.style.opacity = '0';
+            }
+        });
+        document.getElementById('channelButton').addEventListener('click', function () {
+            const channelLinks = document.getElementById('channelLinks');
+            if (channelLinks.style.maxHeight === '0px') {
+                channelLinks.style.animation = 'slideDown 0.5s forwards';
+                channelLinks.style.maxHeight = '200px';
+                channelLinks.style.opacity = '1';
+            } else {
+                channelLinks.style.animation = 'slideUp 0.5s forwards';
+                channelLinks.style.maxHeight = '0';
+                channelLinks.style.opacity = '0';
+            }
+        });
+        document.addEventListener('DOMContentLoaded', createSnowflakes);
+        // WhatsApp Redirection
+        document.getElementById('messageInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const message = encodeURIComponent(this.value);
+                window.location.href = `https://wa.me/6285691259261?text=${message}`;
+            }
+        });
+    </script>
+		</body>
+		</html>
